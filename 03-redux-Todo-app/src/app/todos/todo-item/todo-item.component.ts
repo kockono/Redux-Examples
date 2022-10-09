@@ -15,7 +15,7 @@ export class TodoItemComponent implements OnInit {
 
   @Input() todo:Todo;
   @ViewChild('inputFisico') txtInputFisico!: ElementRef;
-  
+
   editando:boolean = false;
 
   chkCompletado : FormControl;
@@ -25,7 +25,7 @@ export class TodoItemComponent implements OnInit {
     this.todo = { id: 0, texto: '', completado: false };
     this.chkCompletado = new FormControl;
     this.txtInput = new FormControl;
-    
+
    }
 
   ngOnInit(): void {
@@ -47,6 +47,17 @@ export class TodoItemComponent implements OnInit {
 
   terminarEdicion() {
     this.editando = false;
+    // El texto debe de ser valido
+    if (this.txtInput.invalid) { return; }
+    // No puede ser el mismo valor que ya existe
+    if (this.txtInput.value === this.todo.texto) { return; }
+    // Le mandamos el id y el texto
+    this.store.dispatch(
+      actions.editar({
+        id: this.todo.id,
+        texto: this.txtInput.value
+      })
+    )
   }
 
 }
