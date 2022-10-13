@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Todo } from './models/todo.model';
-import { crear, toggle, editar } from './todo.actions';
+import { crear, toggle, editar, borrar, toggleAll, } from './todo.actions';
 
 export const estadoInicial:Todo[] = [
 
@@ -8,7 +8,8 @@ export const estadoInicial:Todo[] = [
 
 const _todoReducer = createReducer(
   estadoInicial,
-  on(crear,  (state, { texto } ) => [...state, new Todo( texto )] ), // Extrae c/u de los items y regresalos independientemente
+  on(crear,  (state, { texto } ) => [...state, new Todo( texto )]), // Extrae c/u de los items y regresalos independientemente
+  on(borrar, (state, { id } ) => state.filter( todo => todo.id !== id ) ),
   on(toggle, (state, { id } ) => {
 
     return state.map( todo => {
@@ -24,9 +25,15 @@ const _todoReducer = createReducer(
 
     });
   }),
+  on(toggleAll, (state, { completado } ) => state.map( todo => {
+      return {
+        ...todo,
+        completado: completado
+      }
+  })),
 
   on(editar, (state, { id, texto } ) => {
-
+    console.log( state )
     return state.map( todo => {
 
       if( todo.id === id) { // De no ser la misma id no podra cambiarlo

@@ -10,8 +10,21 @@ export const toggle = createAction(
   props<{ id: number }>()
 
 );
+
+export const toggleAll = createAction(
+  '[TODO]  Seleccionar todos los Todo',
+  props<{ completado: boolean }>()
+
+);
+
 export const editar = createAction(
   '[TODO] Toggle Todo',
   props<{ id: number, texto: string }>()
+
+);
+
+export const borrar = createAction(
+  '[TODO] Borrar Todo',
+  props<{ id: number }>()
 
 );

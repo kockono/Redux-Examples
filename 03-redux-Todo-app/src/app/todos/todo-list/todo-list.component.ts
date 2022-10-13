@@ -19,7 +19,7 @@ export class TodoListComponent implements OnInit {
   constructor( private store: Store<AppState> ) { }
 
   ngOnInit(): void {
-
+    // Selecciona en nombre de la propiedad de la interface AppState
     this.store.select('todos')
               .subscribe( todos => {
                 console.log( todos );

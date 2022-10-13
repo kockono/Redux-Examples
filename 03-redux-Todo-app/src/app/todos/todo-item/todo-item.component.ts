@@ -1,9 +1,9 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+// Redux
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import { Todo } from '../models/todo.model';
-
 import * as actions from '../todo.actions';
 
 @Component({
@@ -38,6 +38,8 @@ export class TodoItemComponent implements OnInit {
 
   editar() {
     this.editando = true;
+    // para que recuperar el valor seleccionado en el Todo
+    this.txtInput.setValue( this.todo.texto );
     setTimeout(() => {
       // this.txtInputFisico.nativeElement.focus();
       this.txtInputFisico.nativeElement.select();
@@ -58,6 +60,11 @@ export class TodoItemComponent implements OnInit {
         texto: this.txtInput.value
       })
     )
+  }
+
+  borrar() {
+    this.store.dispatch( actions.borrar({ id: this.todo.id }))
+
   }
 
 }
