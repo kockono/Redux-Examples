@@ -1,15 +1,20 @@
 import { createReducer, on } from '@ngrx/store';
 import { Todo } from './models/todo.model';
-import { crear, toggle, editar, borrar, toggleAll, } from './todo.actions';
+import { crear, toggle, editar, borrar, toggleAll, borrarTodos, } from './todo.actions';
 
 export const estadoInicial:Todo[] = [
-
+  new Todo('Salvar al mundo'),
+  new Todo('Vencer a la apatia'),
+  new Todo('Comprar un Mazda 6'),
+  new Todo('Comprar un Tesla'),
+  new Todo('Comprar una Casa'),
 ];
 
 const _todoReducer = createReducer(
   estadoInicial,
   on(crear,  (state, { texto } ) => [...state, new Todo( texto )]), // Extrae c/u de los items y regresalos independientemente
   on(borrar, (state, { id } ) => state.filter( todo => todo.id !== id ) ),
+  on(borrarTodos, state => state.filter( todo => !todo.completado) ), // Todos los todo completado los regresara
   on(toggle, (state, { id } ) => {
 
     return state.map( todo => {
