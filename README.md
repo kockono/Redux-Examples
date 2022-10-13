@@ -1,3 +1,3 @@
 # Redux-Examples
 ### Todo Pages
-https://kockono.github.io/Redux-examples/
+https://kockono-todo-redux-app.netlify.app/
