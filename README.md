@@ -1,4 +1,3 @@
 # Redux-Examples
-</br>
-## Todo Pages
+### Todo Pages
 1. https://kockono.github.io/Redux-examples/
