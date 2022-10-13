@@ -5,6 +5,7 @@ import { Todo } from "./models/todo.model"
 import { ActionReducerMap } from "@ngrx/store"
 import { todoReducer } from "./todo.reducer"
 
+// Aquí iran todos nuestros States
 export interface AppState {
   todos: Todo[],
   filtro: filtrosValido
